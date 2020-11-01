@@ -1,0 +1,67 @@
+scalar DateTime
+
+type Query {
+  feed(filter: String, skip: Int, take: Int, orderBy: LinkOrderByInput): Feed!
+  post(id: ID!): Post
+  checkToken: String
+}
+
+type Mutation {
+  post(title: String!, content: String!): Post!
+  signup(username: String!, password: String!): AuthPayload
+  login(username: String!, password: String!): AuthPayload
+  vote(id: ID!, value: Int!): Vote
+  comment(id: ID!, content: String!): Comment
+}
+
+type Feed {
+  posts: [Post!]!
+  count: Int!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  author: User!
+  votes: [Vote!]
+  voteTotal: Int!
+  comments: [Comment!]!
+}
+
+type Vote {
+  id: ID!
+  value: Int!
+  post: Post!
+  user: User!
+}
+
+type Comment {
+  id: ID!
+  createdAt: DateTime!
+  author: User!
+  content: String!
+  post: Post!
+}
+
+type User {
+  id: ID!
+  username: String!
+  posts: [Post!]!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+input LinkOrderByInput {
+  createdAt: Sort
+  voteTotal: Sort
+}
+
+enum Sort {
+  asc
+  desc
+}

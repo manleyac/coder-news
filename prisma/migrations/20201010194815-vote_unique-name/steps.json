@@ -1,0 +1,25 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Vote",
+          "arguments": [
+            {
+              "name": "fields",
+              "value": "[postId, userId]"
+            },
+            {
+              "name": "name",
+              "value": "\"postId_userId\""
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    }
+  ]
+}

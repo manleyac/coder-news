@@ -1,0 +1,23 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "a blog for all things tech",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "author": "Andrew Manley",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^2.8.1",
+    "bcryptjs": "^2.4.3",
+    "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.8.1"
+  }
+}

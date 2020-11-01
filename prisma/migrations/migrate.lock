@@ -1,0 +1,9 @@
+# Prisma Migrate lockfile v1
+
+20200928223747-init
+20201003173305-posts
+20201010154259-adding-voting
+20201010194815-vote_unique-name
+20201010200359-atomic-updates
+20201017201824-comments
+20201018163229-connecting-comments-posts

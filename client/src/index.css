@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif&family=Roboto&display=swap");
+
+body {
+  margin: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.feedLink {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
