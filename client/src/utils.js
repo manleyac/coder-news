@@ -14,7 +14,7 @@
    if (secondsPast <= 86400) {
      return `${parseInt(secondsPast / 3600)} hours ago`;
    }
-   if (secondsPast < 2592000) {
+   if (secondsPast > 86400) {
      return `${parseInt(secondsPast / 86400)} days ago`
    }
  };
