@@ -3,26 +3,45 @@ const { getUserId } = require("../utils.js");
 
 async function feed(parent, args, context, info) {
   const Authorization = context.request.get("Authorization");
-  
 
   function getUserVotes() {
     const userId = getUserId(context);
     return {
       where: { userId: { equals: userId } },
-      select: {id: true, value: true },
+      select: { id: true, value: true },
+    };
+  }
+
+  function getDate(dateFilter) {
+    const now = new Date();
+
+    switch (dateFilter) {
+      case "Today":
+        const yesterday = new Date(new Date().setDate(now.getDate() - 1));
+        return yesterday;
+      case "This Week":
+        const lastWeek = new Date(new Date().setDate(now.getDate() - 7));
+        return lastWeek;
+      case "This Month":
+        const lastMonth = new Date(new Date().setDate(now.getDate() - 31));
+        return lastMonth;
+      case "This Year":
+        const lastYear = new Date(new Date().setDate(now.getDate() - 365));
+        return lastYear;
+      case "All Time":
+        return undefined;
     }
   }
 
   const where = args.filter
     ? {
-        OR: [
-          { title: { contains: args.filter } },
-          { author: { contains: args.filter } },
-        ],
+        createdAt: {
+          gte: getDate(args.filter),
+        },
       }
     : {};
 
-  const votes = (Authorization ? getUserVotes() : false);
+  const votes = Authorization ? getUserVotes() : false;
 
   const posts = await context.prisma.post.findMany({
     where,
@@ -54,11 +73,11 @@ async function post(parent, args, context, info) {
     const userId = getUserId(context);
     return {
       where: { userId: { equals: userId } },
-      select: {id: true, value: true },
-    }
+      select: { id: true, value: true },
+    };
   }
 
-  const votes = (Authorization ? getUserVotes() : false);
+  const votes = Authorization ? getUserVotes() : false;
 
   const post = await context.prisma.post.findOne({
     where: { id: parseInt(args.id) },

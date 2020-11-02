@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { gql, useQuery, useMutation, useReactiveVar } from "@apollo/client";
 import { Link } from "@reach/router";
 
-import { isLoggedInVar, usernameVar } from "../apollo/cache";
+import { isLoggedInVar } from "../apollo/cache";
 
 //Constants
 import { LINKS_PER_PAGE, UPVOTE, DOWNVOTE } from "../constants";
@@ -16,9 +16,9 @@ import {
   Button,
   Select,
   Text,
-  Form,
   FormField,
   Layer,
+  ThemeContext,
 } from "grommet";
 import { FormClose, FormDown, FormUp } from "grommet-icons";
 import MaxWidth from "../components/common/MaxWidth";
@@ -64,6 +64,7 @@ const defaultValues = {
   sort: { createdAt: "desc" },
   sortBy: "Date",
   search: "",
+  date: "This Year",
   open: false,
   error: "",
 };
@@ -75,12 +76,12 @@ const Feed = () => {
   const [values, setValues] = useState(defaultValues);
   const isLogggedIn = useReactiveVar(isLoggedInVar);
 
-  const { data, loading, error, refetch, fetchMore } = useQuery(GET_FEED, {
+  const { data, loading, error, refetch } = useQuery(GET_FEED, {
     variables: {
       skip: values.pageNum * LINKS_PER_PAGE,
       take: LINKS_PER_PAGE,
       orderBy: values.sort,
-      filter: values.search,
+      filter: values.date,
     },
   });
 
@@ -97,9 +98,9 @@ const Feed = () => {
     },
   });
 
-  if (loading) return <p>Loading</p>;
+  if (loading) return null;
   if (error) return <p>error {console.log(error)}</p>;
-  if (!data) return <p>Not found</p>;
+  if (!loading && !data) return <p>Not found</p>;
 
   const handleVote = (value, id) => {
     if (isLogggedIn) {
@@ -145,7 +146,7 @@ const Feed = () => {
   const VotePanel = (props) => {
     const { id, voteTotal, votes } = props.post;
     const iconColor = (voteDirection) => {
-      if (votes && votes.length != 0) {
+      if (votes && votes.length !== 0) {
         if (voteDirection === votes[0].value) {
           return "accent-3";
         } else {
@@ -200,16 +201,46 @@ const Feed = () => {
             </Box>
           </Layer>
         )}
-        <Box pad="medium">
-          <FormField width="small">
+        <Box pad="medium" direction="row" align="baseline" alignSelf="center">
+          <Text size="medium" color="black" margin={{ right: "xsmall" }}>
+            Sort By:
+          </Text>
+          <ThemeContext.Extend value={{ FormField: { border: "none" } }}>
+            <FormField width="5em" margin={{ right: "large" }} pad={false}>
+              <Select
+                id="sort"
+                name="sort"
+                value={values.sortBy}
+                placeholder="Sort by"
+                options={["Date", "Votes"]}
+                onChange={({ option }) => {
+                  setValues({
+                    ...values,
+                    sortBy: option,
+                    sort: sortObj[option],
+                  });
+                }}
+              />
+            </FormField>
+          </ThemeContext.Extend>
+          <Text color="black" margin={{ right: "xsmall" }}>
+            Date Range:
+          </Text>
+          <FormField width="7em">
             <Select
-              id="sort"
-              name="sort"
-              value={values.sortBy}
-              placeholder="Sort by"
-              options={["Date", "Votes"]}
+              size="medium"
+              id="date"
+              name="date"
+              value={values.date}
+              options={[
+                "Today",
+                "This Week",
+                "This Month",
+                "This Year",
+                "All Time",
+              ]}
               onChange={({ option }) => {
-                setValues({ ...values, sortBy: option, sort: sortObj[option] });
+                setValues({ ...values, date: option });
               }}
             />
           </FormField>

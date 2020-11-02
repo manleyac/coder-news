@@ -20,7 +20,7 @@ const Footer = () => (
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="#"
+          href="https://github.com/manleyac/coder-news"
           className="navLink"
         >
           <Github color="accent-1" size="30px" />

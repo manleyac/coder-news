@@ -70,12 +70,12 @@ const Header = () => {
 
   const user = useReactiveVar(isLoggedInVar);
 
-  const [checkToken, { data, loading, error }] = useLazyQuery(GET_USER, {
+  const [checkToken, { error }] = useLazyQuery(GET_USER, {
     onCompleted: (data) => {
       isLoggedInVar(true);
       usernameVar(data.checkToken);
     },
-    onError: (error) => console.log(error),
+    onError: () => console.log(error),
   });
   useEffect(() => {
     if (token && !isLoggedInVar()) {

@@ -4,6 +4,11 @@ body {
   margin: 0;
 }
 
+input {
+  padding-bottom: 0px !important;
+  padding-right: 0px !important;
+}
+
 .navLink {
   text-decoration: none;
   color: inherit;

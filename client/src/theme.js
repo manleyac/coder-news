@@ -30,13 +30,24 @@ const myTheme = {
   },
   select: {
     background: "accent-1",
+    container: {
+      extend: {
+       padding: "none"
+      }
+    },
     options: {
       text: {
+        size: "medium",
         color: "black",
+        pad: "xsmall",
+      },
+      container: {
+        pad: "xsmall",
       },
     },
     icons: {
       color: "accent-2",
+      margin: "none",
     },
   },
 };

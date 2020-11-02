@@ -62,7 +62,7 @@ const storeUserDataSignup = (data) => {
 const LoginForm = () => {
   const [value, setValue] = useState(defaultValue);
 
-  const [loginUser, { loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [loginUser, { error }] = useMutation(LOGIN_MUTATION, {
     errorPolicy: "all",
     onCompleted: (data) => {
       storeUserDataLogin(data);
@@ -133,7 +133,7 @@ const LoginForm = () => {
 const SignupForm = () => {
   const [value, setValue] = useState(defaultValue);
 
-  const [signupUser, { loading, error }] = useMutation(SIGNUP_MUTATION, {
+  const [signupUser, { error }] = useMutation(SIGNUP_MUTATION, {
     errorPolicy: "all",
     onCompleted: (data) => {
       storeUserDataSignup(data);

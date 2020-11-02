@@ -1,6 +1,6 @@
   //function converts ISO datetime into relative time elapsed
   export const parseDate = (timestamp) => {
-   let currentTime = new Date;
+   let currentTime = new Date();
    let postTime = new Date(timestamp);
    let secondsPast = (currentTime - postTime) / 1000;
    if (secondsPast < 60) {
