@@ -119,11 +119,11 @@ const Submit = () => {
           <Heading level={3} alignSelf="center">
             Post Preview
           </Heading>
-          <Box border="all" height={{ min: "medium" }}>
+          <Box border="all" pad="small" height={{ min: "medium" }}>
             <Heading level={1} alignSelf="center">
               {values.title}
             </Heading>
-            <Markdown>{values.content}</Markdown>
+            <Markdown options={{forceBlock: true}}>{values.content}</Markdown>
           </Box>
         </Box>
       </MaxWidth>

@@ -73,25 +73,62 @@ _italicized text_
 - Second item
 - Third item
 
+```
+- First item
+- Second item
+- Third item
+```
+
 ### Code
 
 `code`
+
+```
+`code`
+```
 
 ### Horizontal Rule
 
 ---
 
+```
+---
+```
+
 ### Link
 
 [title](https://www.example.com)
+```
+[title](https://www.example.com)
+```
 
 ### Image
 
-![alt text](image.jpg)
+![puppy](https://cdn.akc.org/content/hero/pyr_pup_hero.jpg)
+```
+![alt text](image url)
+```
 
 ## Extended Syntax
 
 These elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.
+
+### Fenced Code Blocks
+```json
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
+
+    ```
+    {
+    "firstName": "John",
+    "lastName": "Smith",
+    "age": 25
+    }
+    ```
 
 ### Table
 
@@ -100,16 +137,11 @@ These elements extend the basic syntax by adding additional features. Not all Ma
 | Header | Title |
 | Paragraph | Text |
 
-### Fenced Code Block
-
-````
-
-{
-"firstName": "John",
-"lastName": "Smith",
-"age": 25
-}
-
+```
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
 ```
 
 ### Footnote
@@ -117,22 +149,34 @@ These elements extend the basic syntax by adding additional features. Not all Ma
 Here's a sentence with a footnote. [^1]
 
 [^1]: This is the footnote.
+```
+Here's a sentence with a footnote. [^1]
 
-### Heading ID
-
-### My Great Heading {#custom-id}
+[^1]: This is the footnote.
+```
 
 ### Definition List
 
 term
 : definition
+```
+term
+: definition
+```
 
 ### Strikethrough
 
 ~~The world is flat.~~
+```
+~~The world is flat.~~
+```
 
 ### Task List
 
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+```
 - [x] Write the press release
 - [ ] Update the website
 - [ ] Contact the media

@@ -100,7 +100,7 @@ const Feed = () => {
 
   if (loading) return null;
   if (error) return <p>error {console.log(error)}</p>;
-  if (!loading && !data) return <p>Not found</p>;
+  if (!loading && data.feed.posts === []) return <p>Not found</p>;
 
   const handleVote = (value, id) => {
     if (isLogggedIn) {
@@ -246,29 +246,33 @@ const Feed = () => {
           </FormField>
         </Box>
         <Box>
-          {data.feed.posts.map((post) => (
-            <Box
-              key={post.id}
-              direction="row"
-              margin="small"
-              pad="small"
-              round="small"
-              background="accent-2"
-              elevation="small"
-            >
-              <VotePanel post={post} />
-              <Link to={`post/${post.id}`} className="feedLink">
-                <Box fill="horizontal">
-                  <Heading level={3} margin="small" alignSelf="center">
-                    {post.title}
-                  </Heading>
-                  <Text alignSelf="center">{` By ${
-                    post.author.username
-                  } | ${parseDate(post.createdAt)}`}</Text>
-                </Box>
-              </Link>
-            </Box>
-          ))}
+          {data.feed.posts.length < 1 ? (
+            <Heading level={3} alignSelf="center">No Posts Found</Heading>
+          ) : (
+            data.feed.posts.map((post) => (
+              <Box
+                key={post.id}
+                direction="row"
+                margin="small"
+                pad="small"
+                round="small"
+                background="accent-2"
+                elevation="small"
+              >
+                <VotePanel post={post} />
+                <Link to={`post/${post.id}`} className="feedLink">
+                  <Box fill="horizontal">
+                    <Heading level={3} margin="small" alignSelf="center">
+                      {post.title}
+                    </Heading>
+                    <Text alignSelf="center">{` By ${
+                      post.author.username
+                    } | ${parseDate(post.createdAt)}`}</Text>
+                  </Box>
+                </Link>
+              </Box>
+            ))
+          )}
         </Box>
 
         <Box direction="row" fill="horizontal">

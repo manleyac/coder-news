@@ -15,6 +15,7 @@ import {
 } from "grommet";
 import { FormClose, FormDown, FormUp } from "grommet-icons";
 import MaxWidth from "../components/common/MaxWidth";
+import CustomMD from "../components/common/CustomMD";
 
 //Constants
 import { UPVOTE, DOWNVOTE } from "../constants";
@@ -214,7 +215,7 @@ const Post = (props) => {
             </Text>
           </Box>
           <Box border="all" pad="small" round="small">
-            <Markdown align="center">{data.post.content}</Markdown>
+            <CustomMD>{data.post.content}</CustomMD>
           </Box>
         </Box>
         <Box

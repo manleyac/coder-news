@@ -53,7 +53,7 @@ Run the application in developer mode.
 npm run dev
 ```
 ## Testing
-tba
+TBA
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
