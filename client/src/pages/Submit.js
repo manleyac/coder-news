@@ -17,6 +17,7 @@ import {
 } from "grommet";
 import { FormClose } from "grommet-icons";
 import MaxWidth from "../components/common/MaxWidth";
+import CustomMD from "../components/common/CustomMD";
 
 const SUBMIT_POST = gql`
   mutation Post($title: String!, $content: String!) {
@@ -49,12 +50,13 @@ const Submit = () => {
   };
 
   return (
-    <Box background="accent-1">
+    <Box id="content" background="accent-1">
       <MaxWidth>
         {values.open && (
           <Layer
             animation="fadeIn"
             position="top"
+            responsive={false}
             modal={false}
             style={{ marginTop: "6vh" }}
             onEsc={closeLayer}
@@ -123,7 +125,7 @@ const Submit = () => {
             <Heading level={1} alignSelf="center">
               {values.title}
             </Heading>
-            <Markdown options={{forceBlock: true}}>{values.content}</Markdown>
+            <CustomMD >{values.content}</CustomMD>
           </Box>
         </Box>
       </MaxWidth>

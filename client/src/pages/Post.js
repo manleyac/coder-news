@@ -164,12 +164,13 @@ const Post = (props) => {
   };
 
   return (
-    <Box background="accent-1" pad={{bottom: "medium"}} style={{ minHeight: "50vh" }}>
+    <Box id="content" background="accent-1" pad={{bottom: "medium"}} style={{ minHeight: "50vh" }}>
       <MaxWidth>
         {values.open && (
           <Layer
             animation="fadeIn"
             position="top"
+            responsive={false}
             modal={false}
             style={{ marginTop: "6vh" }}
             onEsc={closeLayer}

@@ -4,10 +4,11 @@ const myTheme = {
       family: "Roboto",
     },
     colors: {
-      brand: "#1E441E",
-      "accent-1": "#F4F4F6",
-      "accent-2": "#726E75",
-      "accent-3": "#EE7B30",
+      brand: "#0c7c59",
+      "accent-1": "#EEEEEE",
+      "accent-2": "#303841",
+      "accent-3": "#FF5722",
+      "accent-4": "#405B64",
       focus: "dark-6",
       text: {
         dark: "accent-1",
@@ -32,8 +33,8 @@ const myTheme = {
     background: "accent-1",
     container: {
       extend: {
-       padding: "none"
-      }
+        padding: "none",
+      },
     },
     options: {
       text: {

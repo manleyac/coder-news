@@ -3,7 +3,7 @@ import { ApolloProvider, ApolloClient, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { cache } from "./apollo/cache";
 import { Router } from "@reach/router";
-import { Grommet } from "grommet";
+import { Grommet, Box } from "grommet";
 
 //constants
 import { AUTH_TOKEN } from "./constants";
@@ -48,14 +48,14 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Grommet theme={myTheme}>
-        <Header />
-        <Router>
-          <Feed path="/" />
-          <Login path="login" />
-          <Post path="post/:postID" />
-          <Submit path="submit" />
-        </Router>
-        <Footer />
+          <Header />
+          <Router>
+            <Feed path="/" />
+            <Login path="login" />
+            <Post path="post/:postID" />
+            <Submit path="submit" />
+          </Router>
+          <Footer />
       </Grommet>
     </ApolloProvider>
   );

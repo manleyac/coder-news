@@ -230,7 +230,7 @@ const Login = () => {
   const [loginUser, setLogin] = useState(true);
 
   return (
-    <Box background="accent-1" style={{ minHeight: "50vh" }}>
+    <Box id="content" background="accent-1" style={{ minHeight: "50vh" }}>
       <MaxWidth>
         {loginUser ? <LoginForm /> : <SignupForm />}
 
@@ -240,6 +240,7 @@ const Login = () => {
             color="accent-3"
             margin="medium"
             size="medium"
+            elevation="large"
             label={loginUser ? "Create an account?" : "Need to login?"}
             onClick={() => setLogin(!loginUser)}
           />

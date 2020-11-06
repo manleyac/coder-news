@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { gql, useQuery, useMutation, useReactiveVar } from "@apollo/client";
 import { Link } from "@reach/router";
 
@@ -10,17 +10,8 @@ import { LINKS_PER_PAGE, UPVOTE, DOWNVOTE } from "../constants";
 import { parseDate } from "../utils";
 
 //Styled Components
-import {
-  Box,
-  Heading,
-  Button,
-  Select,
-  Text,
-  FormField,
-  Layer,
-  ThemeContext,
-} from "grommet";
-import { FormClose, FormDown, FormUp } from "grommet-icons";
+import { Box, Heading, Button, Select, Text, FormField, Layer } from "grommet";
+import { FormClose, FormDown, FormUp, Filter } from "grommet-icons";
 import MaxWidth from "../components/common/MaxWidth";
 
 const GET_FEED = gql`
@@ -62,19 +53,25 @@ const VOTE_POST = gql`
 const defaultValues = {
   pageNum: 0,
   sort: { createdAt: "desc" },
-  sortBy: "Date",
+  sortBy: "Newest",
   search: "",
   date: "This Year",
   open: false,
+  showFilter: false,
   error: "",
 };
 
 //obj relating sort options to argument passed to feed query
-const sortObj = { Votes: { voteTotal: "desc" }, Date: { createdAt: "desc" } };
+const sortObj = {
+  Votes: { voteTotal: "desc" },
+  Newest: { createdAt: "desc" },
+  Oldest: { createdAt: "asc" },
+};
 
 const Feed = () => {
   const [values, setValues] = useState(defaultValues);
   const isLogggedIn = useReactiveVar(isLoggedInVar);
+  const ref = useRef();
 
   const { data, loading, error, refetch } = useQuery(GET_FEED, {
     variables: {
@@ -156,17 +153,19 @@ const Feed = () => {
       return "accent-1";
     };
     return (
-      <Box width="xxsmall">
+      <Box direction="row">
         <Button
-          pad="none"
+          style={{ padding: "0" }}
           alignSelf="center"
           icon={<FormUp size="30px" color={iconColor(UPVOTE)} />}
           onClick={() => handleVote(UPVOTE, id)}
         />
-        <Text alignSelf="center">{voteTotal}</Text>
+        <Text margin="xsmall" size="small" alignSelf="center">
+          {voteTotal}
+        </Text>
         <Button
           alignSelf="center"
-          pad="none"
+          style={{ padding: "0" }}
           icon={<FormDown size="30px" color={iconColor(DOWNVOTE)} />}
           onClick={() => handleVote(DOWNVOTE, id)}
         />
@@ -176,14 +175,21 @@ const Feed = () => {
 
   return (
     <Box
+      id="content"
       background="accent-1"
-      style={{ minHeight: "50vh", paddingBottom: "5vh" }}
+      style={{
+        height: "100%",
+        minHeight: "50vh",
+        paddingBottom: "5vh",
+        zIndex: 1,
+      }}
     >
       <MaxWidth>
         {values.open && (
           <Layer
             animation="fadeIn"
             position="top"
+            responsive={false}
             modal={false}
             style={{ marginTop: "6vh" }}
             onEsc={closeLayer}
@@ -201,75 +207,130 @@ const Feed = () => {
             </Box>
           </Layer>
         )}
-        <Box pad="medium" direction="row" align="baseline" alignSelf="center">
-          <Text size="medium" color="black" margin={{ right: "xsmall" }}>
-            Sort By:
-          </Text>
-          <ThemeContext.Extend value={{ FormField: { border: "none" } }}>
-            <FormField width="5em" margin={{ right: "large" }} pad={false}>
-              <Select
-                id="sort"
-                name="sort"
-                value={values.sortBy}
-                placeholder="Sort by"
-                options={["Date", "Votes"]}
-                onChange={({ option }) => {
-                  setValues({
-                    ...values,
-                    sortBy: option,
-                    sort: sortObj[option],
-                  });
-                }}
-              />
-            </FormField>
-          </ThemeContext.Extend>
-          <Text color="black" margin={{ right: "xsmall" }}>
-            Date Range:
-          </Text>
-          <FormField width="7em">
-            <Select
-              size="medium"
-              id="date"
-              name="date"
-              value={values.date}
-              options={[
-                "Today",
-                "This Week",
-                "This Month",
-                "This Year",
-                "All Time",
-              ]}
-              onChange={({ option }) => {
-                setValues({ ...values, date: option });
-              }}
+        <Box
+          direction="row"
+          fill={true}
+          pad={{ top: "small", right: "large", bottom: "small", left: "large" }}
+          justify="end"
+        >
+          <Box alignSelf="center">
+            <Button
+              fill={false}
+              icon={<Filter color="accent-2" />}
+              onClick={() =>
+                setValues({ ...values, showFilter: !values.showFilter })
+              }
+              plain
             />
-          </FormField>
+          </Box>
         </Box>
+        {values.showFilter && (
+          <Layer
+            animation="fadeIn"
+            position="top"
+            responsive={false}
+            modal={false}
+            style={{ marginTop: "10vh" }}
+            onEsc={closeLayer}
+            plain
+          >
+            <Box
+              fill={true}
+              pad="xsmall"
+              direction="column"
+              alignSelf="center"
+              background="accent-1"
+              justify="center"
+              textAlign="center"
+              elevation="large"
+            >
+              <Box direction="row" fill="horizontal" justify="end">
+                <Button
+                  icon={<FormClose size="medium"/>}
+                  fill={false}
+                  style={{ padding: "4px", width: "32px" }}
+                  onClick={() => setValues({ ...values, showFilter: false })}
+                  default
+                />
+              </Box>
+              <Box pad={{ left: "large", bottom: "large", right: "large" }}>
+                <Text size="medium" color="black" textAlign="center">
+                  Sort By:
+                </Text>
+                <FormField width="7em" pad={false}>
+                  <Select
+                    id="sort"
+                    name="sort"
+                    value={values.sortBy}
+                    placeholder="Sort by"
+                    options={["Newest", "Oldest", "Votes"]}
+                    onChange={({ option }) => {
+                      setValues({
+                        ...values,
+                        sortBy: option,
+                        sort: sortObj[option],
+                      });
+                    }}
+                  />
+                </FormField>
+                <Text color="black" textAlign="center">
+                  Date Range:
+                </Text>
+                <FormField width="7em">
+                  <Select
+                    size="medium"
+                    id="date"
+                    name="date"
+                    value={values.date}
+                    options={[
+                      "Today",
+                      "This Week",
+                      "This Month",
+                      "This Year",
+                      "All Time",
+                    ]}
+                    onChange={({ option }) => {
+                      setValues({ ...values, date: option });
+                    }}
+                  />
+                </FormField>
+              </Box>
+            </Box>
+          </Layer>
+        )}
         <Box>
           {data.feed.posts.length < 1 ? (
-            <Heading level={3} alignSelf="center">No Posts Found</Heading>
+            <Heading level={3} alignSelf="center">
+              No Posts Found
+            </Heading>
           ) : (
             data.feed.posts.map((post) => (
               <Box
                 key={post.id}
-                direction="row"
+                direction="column"
                 margin="small"
                 pad="small"
                 round="small"
                 background="accent-2"
                 elevation="small"
               >
-                <VotePanel post={post} />
                 <Link to={`post/${post.id}`} className="feedLink">
                   <Box fill="horizontal">
-                    <Heading level={3} margin="small" alignSelf="center">
+                    <Heading level={3} margin="xsmall" alignSelf="center">
                       {post.title}
                     </Heading>
-                    <Text alignSelf="center">{` By ${
-                      post.author.username
-                    } | ${parseDate(post.createdAt)}`}</Text>
                   </Box>
                 </Link>
+                <Box direction="row" justify="center">
+                  <VotePanel post={post} />
+                  <Text
+                    size="small"
+                    alignSelf="center"
+                    margin={{ left: "small" }}
+                  >{` By ${post.author.username} | ${parseDate(
+                    post.createdAt
+                  )}`}</Text>
+                </Box>
               </Box>
             ))
           )}
