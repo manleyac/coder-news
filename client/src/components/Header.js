@@ -168,7 +168,7 @@ const Header = () => {
         }}
       >
         <Box
-          background="accent-4"
+          background="accent-2"
           direction="column"
           alignContent="center"
           height="100%"
@@ -182,7 +182,7 @@ const Header = () => {
   };
 
   return (
-    <Box id="header" background="brand" elevation="large">
+    <Box id="header" background="linear-gradient(60deg, #6c7b8a, #56616e)" elevation="large">
       <MaxWidth>
         <Box
           margin={{ left: "small", right: "small" }}
@@ -195,7 +195,7 @@ const Header = () => {
           style={{zIndex: 100}}
         >
           <Link to="/" className="navLink">
-            <Heading level={2} color="accent-1">
+            <Heading level={3} responsive={false} color="accent-1">
               <strong>Coder News</strong>
             </Heading>
           </Link>

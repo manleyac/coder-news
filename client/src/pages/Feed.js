@@ -176,10 +176,10 @@ const Feed = () => {
   return (
     <Box
       id="content"
-      background="accent-1"
+      background="accent-5"
       style={{
         height: "100%",
-        minHeight: "50vh",
+        minHeight: "calc(100vh - 84px - 96px)",
         paddingBottom: "5vh",
         zIndex: 1,
       }}
@@ -216,7 +216,7 @@ const Feed = () => {
           <Box alignSelf="center">
             <Button
               fill={false}
-              icon={<Filter color="accent-2" />}
+              icon={<Filter color="brand" />}
               onClick={() =>
                 setValues({ ...values, showFilter: !values.showFilter })
               }
@@ -315,7 +315,7 @@ const Feed = () => {
                 elevation="small"
               >
                 <Link to={`post/${post.id}`} className="feedLink">
-                  <Box fill="horizontal">
+                  <Box background="brand" fill="horizontal" elevation="medium" round="small">
                     <Heading level={3} margin="xsmall" alignSelf="center">
                       {post.title}
                     </Heading>

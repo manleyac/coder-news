@@ -164,7 +164,7 @@ const Post = (props) => {
   };
 
   return (
-    <Box id="content" background="accent-1" pad={{bottom: "medium"}} style={{ minHeight: "50vh" }}>
+    <Box id="content" background="accent-5" pad={{bottom: "medium"}} style={{ height: "100%", minHeight: "calc(100vh - 84px - 96px)", }}>
       <MaxWidth>
         {values.open && (
           <Layer
@@ -195,9 +195,11 @@ const Post = (props) => {
           round="small"
           elevation="medium"
         >
-          <Heading level={1} alignSelf="center">
-            {data.post.title}
-          </Heading>
+          <Box background="brand" elevation="medium" round="small">
+            <Heading level={1} alignSelf="center">
+              {data.post.title}
+            </Heading>
+          </Box>
 
           <Box
             alignSelf="center"

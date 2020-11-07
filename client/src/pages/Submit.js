@@ -50,7 +50,7 @@ const Submit = () => {
   };
 
   return (
-    <Box id="content" background="accent-1">
+    <Box id="content" background="accent-5" style={{minHeight: "calc(100vh - 84px - 96px)",}}>
       <MaxWidth>
         {values.open && (
           <Layer

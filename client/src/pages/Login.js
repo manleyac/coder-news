@@ -91,9 +91,11 @@ const LoginForm = () => {
       elevation="large"
       round="medium"
     >
-      <Heading level={3} alignSelf="center" margin={{ top: "0" }}>
-        Login
-      </Heading>
+      <Box background="brand" elevation="medium" round="small" pad="small">
+        <Heading level={3} alignSelf="center" margin="none">
+          Login
+        </Heading>
+      </Box>
       <Text alignSelf="center" weight="bold" color="status-critical">
         {value.error}
       </Text>
@@ -166,9 +168,11 @@ const SignupForm = () => {
       elevation="large"
       round="medium"
     >
-      <Heading level={3} alignSelf="center" margin={{ top: "0" }}>
-        Signup
-      </Heading>
+      <Box background="brand" elevation="medium" round="small" pad="small">
+        <Heading level={3} alignSelf="center" margin="none">
+          Signup
+        </Heading>
+      </Box>
       <Text alignSelf="center" weight="bold" color="status-critical">
         {value.error}
       </Text>
@@ -230,7 +234,7 @@ const Login = () => {
   const [loginUser, setLogin] = useState(true);
 
   return (
-    <Box id="content" background="accent-1" style={{ minHeight: "50vh" }}>
+    <Box id="content" background="accent-5" style={{ minHeight: "calc(100vh - 84px - 96px)", }}>
       <MaxWidth>
         {loginUser ? <LoginForm /> : <SignupForm />}
 
