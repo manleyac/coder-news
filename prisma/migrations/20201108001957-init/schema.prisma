@@ -3,7 +3,6 @@
 
 datasource db {
   provider = "postgresql"
-  previewFeatures = ["atomicNumberOperations"]
   url = "***"
 }
 
@@ -20,7 +19,7 @@ model Post {
   author      User?       @relation(fields: [authorId], references: [id])
   votes       Vote[]
   voteTotal   Int        @default(1)
-  
+  comments    Comment[]
 }
 
 model User {
@@ -40,4 +39,14 @@ model Vote {
   user   User @relation(fields: [userId], references: [id])
 
   @@unique(fields: [postId, userId], name: "postId_userId")
+}
+
+model Comment {
+  id          Int         @default(autoincrement()) @id
+  createdAt   DateTime    @default(now())
+  authorId    Int
+  postId      Int
+  content     String 
+  author      User       @relation(fields: [authorId], references: [id])
+  post        Post        @relation(fields: [postId], references: [id])
 }
