@@ -21,8 +21,10 @@ import Footer from "./components/Footer";
 //grommet theme
 import myTheme from "./theme.js";
 
+const PORT = process.env.PORT || 4000;
+
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri: `http://localhost:${PORT}`,
 });
 
 const authLink = setContext((_, { headers }) => {
