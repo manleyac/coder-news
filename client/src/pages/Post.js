@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { gql, useQuery, useMutation, useReactiveVar } from "@apollo/client";
 import { isLoggedInVar } from "../apollo/cache";
+import { navigate } from "@reach/router";
 
 import {
   Box,
@@ -80,6 +81,10 @@ const Post = (props) => {
 
   const { data, loading, error, refetch } = useQuery(GET_POST, {
     variables: { id: props.postID },
+    onError: async () => {
+      console.log(error);
+      await navigate("/notfound");
+    },
   });
 
   const [votePost] = useMutation(VOTE_POST, {
@@ -104,9 +109,9 @@ const Post = (props) => {
   });
 
   if (loading) return <p>Loading</p>;
-  if (error) return <p>error {console.log(error)}</p>;
-  if (!data) {
-    return <p>Not found</p>;
+  if (data.post === null) {
+    const redirect = async () => await navigate("/notfound");
+    redirect();
   }
 
   const handleVote = (value, id) => {
@@ -163,7 +168,12 @@ const Post = (props) => {
   };
 
   return (
-    <Box id="content" background="accent-5" pad={{bottom: "medium"}} style={{ height: "100%", minHeight: "calc(100vh - 84px - 96px)", }}>
+    <Box
+      id="content"
+      background="accent-5"
+      pad={{ bottom: "medium" }}
+      style={{ height: "100%", minHeight: "calc(100vh - 84px - 96px)" }}
+    >
       <MaxWidth>
         {values.open && (
           <Layer
@@ -261,9 +271,7 @@ const Post = (props) => {
                   } | ${parseDate(comment.createdAt)}:`}</Text>
                 </Box>
                 <Box fill="horizontal" border="all" pad="small" round="small">
-                  <Text size="large" >
-                    {comment.content}
-                  </Text>
+                  <Text size="large">{comment.content}</Text>
                 </Box>
               </Box>
             ))}

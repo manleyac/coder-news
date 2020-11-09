@@ -14,6 +14,7 @@ import Feed from "./pages/Feed";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Submit from "./pages/Submit";
+import NotFound from "./pages/NotFound";
 
 //components
 import Header from "./components/Header";
@@ -55,6 +56,7 @@ function App() {
           <Login path="login" />
           <Post path="post/:postID" />
           <Submit path="submit" />
+          <NotFound default path="notfound"/>
         </Router>
         <Footer />
       </Grommet>
