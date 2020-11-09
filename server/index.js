@@ -31,15 +31,14 @@ const server = new GraphQLServer({
   },
 });
 
+
+
 //serve client static assets
-server.express.get("*", (req, res, next) => {
-  // Handle graphql-yoga specific routes
-  if (req.url == options.endpoint) {
-    // Return next() so that the GraphQLServer will handle it
-    return next();
-  }
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+server.express.use(express.static(path.join(__dirname, '../client/build')));
+server.express.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
+
 
 server.start(options, ({ port }) =>
   console.log(`Server running on port: ${port}`)
