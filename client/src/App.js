@@ -3,10 +3,11 @@ import { ApolloProvider, ApolloClient, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { cache } from "./apollo/cache";
 import { Router } from "@reach/router";
-import { Grommet, Box } from "grommet";
+import { Grommet } from "grommet";
 
 //constants
 import { AUTH_TOKEN } from "./constants";
+import { SERVER_URL } from "./constants";
 
 //pages
 import Feed from "./pages/Feed";
@@ -21,10 +22,8 @@ import Footer from "./components/Footer";
 //grommet theme
 import myTheme from "./theme.js";
 
-const PORT = process.env.PORT || 4000;
-
 const httpLink = createHttpLink({
-  uri: `http://localhost:${PORT}`,
+  uri: SERVER_URL,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -50,14 +49,14 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Grommet theme={myTheme}>
-          <Header />
-          <Router>
-            <Feed path="/" />
-            <Login path="login" />
-            <Post path="post/:postID" />
-            <Submit path="submit" />
-          </Router>
-          <Footer />
+        <Header />
+        <Router>
+          <Feed path="/" />
+          <Login path="login" />
+          <Post path="post/:postID" />
+          <Submit path="submit" />
+        </Router>
+        <Footer />
       </Grommet>
     </ApolloProvider>
   );

@@ -5,7 +5,6 @@ import { isLoggedInVar } from "../apollo/cache";
 import {
   Box,
   Heading,
-  Markdown,
   Button,
   Text,
   TextArea,

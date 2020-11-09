@@ -9,7 +9,7 @@ import { AUTH_TOKEN } from "../constants";
 //components
 import MaxWidth from "./common/MaxWidth";
 import { Box, Heading, Layer, Button } from "grommet";
-import { Menu, Close, Calculator } from "grommet-icons";
+import { Menu, Close } from "grommet-icons";
 
 const GET_USER = gql`
   query {

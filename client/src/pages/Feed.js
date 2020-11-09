@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { gql, useQuery, useMutation, useReactiveVar } from "@apollo/client";
 import { Link } from "@reach/router";
 
@@ -71,7 +71,6 @@ const sortObj = {
 const Feed = () => {
   const [values, setValues] = useState(defaultValues);
   const isLogggedIn = useReactiveVar(isLoggedInVar);
-  const ref = useRef();
 
   const { data, loading, error, refetch } = useQuery(GET_FEED, {
     variables: {
@@ -96,7 +95,7 @@ const Feed = () => {
   });
 
   if (loading) return null;
-  if (error) return <p>error {console.log(error)}</p>;
+  if (error) return (<p>error {console.log(error)}</p>);
   if (!loading && data.feed.posts === []) return <p>Not found</p>;
 
   const handleVote = (value, id) => {

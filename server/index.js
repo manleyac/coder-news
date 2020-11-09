@@ -10,6 +10,7 @@ const Mutation = require("./resolvers/Mutation");
 const options = {
   port: process.env.PORT || 4000,
   playground: false,
+  endpoint: "/graphql"
 }
 
 const resolvers = {
