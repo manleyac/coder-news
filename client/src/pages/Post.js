@@ -204,7 +204,7 @@ const Post = (props) => {
           round="small"
           elevation="medium"
         >
-          <Box background="brand" elevation="medium" round="small">
+          <Box background="brand" elevation="medium" pad="xsmall" round="small">
             <Heading level={1} alignSelf="center">
               {data.post.title}
             </Heading>

@@ -185,7 +185,7 @@ const Header = () => {
     <Box id="header" background="linear-gradient(60deg, #6c7b8a, #56616e)" elevation="large">
       <MaxWidth>
         <Box
-          margin={{ left: "small", right: "small" }}
+          pad={{ left: "small", right: "small" }}
           direction="row"
           fill="horizontal"
           align="baseline"
