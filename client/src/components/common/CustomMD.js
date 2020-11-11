@@ -4,15 +4,15 @@ import { Markdown, Heading, Paragraph, Image } from "grommet";
 const markdownComponents = {
   h1: {
     component: Heading,
-    props: { level: 1, alignSelf: "center", style: { maxWidth: "100%" } },
+    props: { level: 1, alignSelf: "center", textAlign: "center", style: { maxWidth: "100%" } },
   },
   h2: {
     component: Heading,
-    props: { level: 2, alignSelf: "center", style: { maxWidth: "100%" } },
+    props: { level: 2, alignSelf: "center", textAlign: "center", style: { maxWidth: "100%" } },
   },
   h3: {
     component: Heading,
-    props: { level: 3, alignSelf: "center", style: { maxWidth: "100%" } },
+    props: { level: 3, alignSelf: "center", textAlign: "center", style: { maxWidth: "100%" } },
   },
   img: {
     component: Image,
