@@ -117,7 +117,8 @@ const Feed = () => {
       margin="small"
       alignSelf="end"
       label="Next"
-      color="accent-3"
+      color="brand"
+      primary
       onClick={() => {
         setValues({ ...values, pageNum: values.pageNum + 1 });
       }}
@@ -131,7 +132,8 @@ const Feed = () => {
       margin="small"
       alignSelf="start"
       label="Prev"
-      color="accent-3"
+      color="brand"
+      primary
       onClick={() => {
         setValues({ ...values, pageNum: values.pageNum - 1 });
       }}
