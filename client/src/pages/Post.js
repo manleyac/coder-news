@@ -259,7 +259,7 @@ const Post = (props) => {
                 placeholder="Add Comment:"
               />
             </FormField>
-            <Button type="submit" label="submit" color="accent-3" primary />
+            <Button type="submit" label="submit" color="brand" primary />
           </Form>
 
           <Box>

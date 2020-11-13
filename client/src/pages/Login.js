@@ -124,7 +124,7 @@ const LoginForm = () => {
           <TextInput id="text-input-id" name="password" />
         </FormField>
         <Box direction="row" gap="medium">
-          <Button type="submit" primary label="Submit" color="accent-3" />
+          <Button type="submit" primary label="Submit" color="brand" />
         </Box>
       </Form>
     </Box>
@@ -222,7 +222,7 @@ const SignupForm = () => {
           <TextInput id="text-input-id" name="password2" />
         </FormField>
         <Box direction="row" gap="medium">
-          <Button type="submit" primary label="Submit" color="accent-3" />
+          <Button type="submit" primary label="Submit" color="brand" />
         </Box>
       </Form>
     </Box>
@@ -241,7 +241,7 @@ const Login = () => {
         <Box alignSelf="center">
           <Button
             primary
-            color="accent-3"
+            color="accent-4"
             margin="medium"
             size="medium"
             elevation="large"
